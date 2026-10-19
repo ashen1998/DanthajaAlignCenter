@@ -1,0 +1,36 @@
+/* ==========================================================================
+   Animation initial states.
+   Elements start hidden only when JS + Motion are running (html.js-motion is
+   set by an inline head script). If Motion fails to load or is slow,
+   js/animations.js or the head-script timeout adds .motion-off so all
+   content stays visible.
+   ========================================================================== */
+
+.js-motion [data-reveal],
+.js-motion [data-reveal-stagger] > *,
+.js-motion [data-hero-item],
+.js-motion .timeline__step { opacity: 0; }
+
+.motion-off [data-reveal],
+.motion-off [data-reveal-stagger] > *,
+.motion-off [data-hero-item],
+.motion-off .timeline__step { opacity: 1 !important; transform: none !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js-motion [data-reveal],
+  .js-motion [data-reveal-stagger] > *,
+  .js-motion [data-hero-item],
+  .js-motion .timeline__step { opacity: 1 !important; transform: none !important; }
+
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  [data-reveal], [data-reveal-stagger] > *, [data-hero-item], .timeline__step { opacity: 1 !important; transform: none !important; }
+  .site-header, .mobile-cta-bar, .mobile-menu, .hero__controls { display: none !important; }
+}
